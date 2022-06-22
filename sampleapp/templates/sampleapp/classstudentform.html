@@ -1,0 +1,24 @@
+{% extends "sampleapp/base.html" %}
+{% block body_block %}
+<form method="POST">
+    {% csrf_token %}
+
+    <div style="border: 1px solid green; height: 25px;">
+        {% if MyClassStudent.errors %}
+        {% for field in MyClassStudent %}
+        {% for error in field.errors %}
+            <p> {{ error }} </p>
+        {% endfor %}
+        {% endfor %}
+    {% endif %}
+    </div>
+
+
+    <center>
+        <table>
+            {{MyClassStudent.as_table}}
+        </table>
+        <input type="submit" value="Save" class="btn btn-info"/>
+    </center>
+</form>
+{% endblock %}

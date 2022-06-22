@@ -1,0 +1,48 @@
+{% extends "sampleapp/base.html" %}
+{% block body_block %}
+<form>
+    {% csrf_token %}
+    <div class="table-responsive">
+        <label class="control-label">Class Name</label>
+        <input type="text" id="classinfo" name="class_name"/>
+        <label class="control-label">Student</label>
+        <input type="text" id="studentinfo" name="student_name"/>
+        <input type="submit" value="Search" id="classstudetget"/>
+        <table class="table table-striped table-bordered table-sm" id="classstudentlist">
+            <thead>
+                <tr>
+                    <th>Class</th>
+                    <th>Student</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in page_obj %}
+                <tr>
+                    <td>{{item.classname}}</td>
+                    <td>{{item.student}}</td>
+                    <td>
+                        <a href="{% url 'classstudent_edit' csid=item.cs_bridgeid %}">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                <a href="?{%if Classname%}Classname={{Classname}}&{%endif%}{%if Student%}Student={{Student}}&{%endif%}page=1">first</a>
+                <a href="?{%if Classname%}Classname={{Classname}}&{%endif%}{%if Student%}Student={{Student}}&{%endif%}page={{page_obj.previous_page_number}}">previous</a>
+                {% endif %}
+                <span class="current">
+                    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+                </span>
+                {% if page_obj.has_next %}
+                <a href="?{%if Classname%}Classname={{Classname}}&{%endif%}{%if Student%}Student={{Student}}&{%endif%}page={{page_obj.next_page_number}}">next</a>
+                <a href="?{%if Classname%}Classname={{Classname}}&{%endif%}{%if Student%}Student={{Student}}&{%endif%}page={{page_obj.paginator.num_pages}}">last</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</form>
+{% endblock %}

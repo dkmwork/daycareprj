@@ -1,0 +1,35 @@
+{% extends "sampleapp/base.html" %}
+{% block body_block %}
+<form method="POST">
+    {% csrf_token %}
+    <center>
+        <table>
+            <!-- {{MyTeacher.as_table}} -->
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>{{MyTeacher.teacher_name}}</td>
+                </tr>
+                <tr>
+                    <td>Contact No</td>
+                    <td>{{MyTeacher.contact_no}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{MyTeacher.teachers_email}}</td>
+                </tr>
+                <tr>
+                    <td>Qualifications</td>
+                    <td>{{MyTeacher.qualifications}}</td>
+                </tr>
+                <tr>
+                    <td>Years_Exp</td>
+                    <td>{{MyTeacher.years_experience}}</td>
+                </tr>
+            </tbody>
+        </table></br>
+    
+        <input type="submit" value="Save" class="btn btn-info"/>
+    </center>
+</form>
+{% endblock %}
